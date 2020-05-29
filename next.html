@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer; 
+}
+
+.overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+.curtainText{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: white;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+
+.clicked-item {
+    background-color: aliceblue;
+    color: aliceblue;
+}
+</style>
+</head>
+<body>
+
+<div style="height: 100px;">
+    <h1><em>NEXT <var id="nextNumber">1</var></em></h1>
+</div>
+
+<div id="curtain" class="overlay" onclick="hideCurtain()">
+    <div class="curtainText">
+        play
+    </div>
+</div>
+
+<div class="grid-container">
+  <div id="g11" class="grid-item">1</div>
+  <div id="g12" class="grid-item">2</div>
+  <div id="g13" class="grid-item">3</div>  
+  <div id="g14" class="grid-item">4</div>
+  <div id="g15" class="grid-item">5</div>
+  <div id="g16" class="grid-item">6</div>  
+  <div id="g21" class="grid-item">1</div>
+  <div id="g22" class="grid-item">2</div>
+  <div id="g23" class="grid-item">3</div>  
+  <div id="g24" class="grid-item">4</div>
+  <div id="g25" class="grid-item">5</div>
+  <div id="g26" class="grid-item">6</div> 
+  <div id="g31" class="grid-item">1</div>
+  <div id="g32" class="grid-item">2</div>
+  <div id="g33" class="grid-item">3</div>  
+  <div id="g34" class="grid-item">4</div>
+  <div id="g35" class="grid-item">5</div>
+  <div id="g36" class="grid-item">6</div> 
+  <div id="g41" class="grid-item">1</div>
+  <div id="g42" class="grid-item">2</div>
+  <div id="g43" class="grid-item">3</div>  
+  <div id="g44" class="grid-item">4</div>
+  <div id="g45" class="grid-item">5</div>
+  <div id="g46" class="grid-item">6</div>  
+  <div id="g51" class="grid-item">1</div>
+  <div id="g52" class="grid-item">2</div>
+  <div id="g53" class="grid-item">3</div>  
+  <div id="g54" class="grid-item">4</div>
+  <div id="g55" class="grid-item">5</div>
+  <div id="g56" class="grid-item">6</div> 
+  <div id="g61" class="grid-item">1</div>
+  <div id="g62" class="grid-item">2</div>
+  <div id="g63" class="grid-item">3</div>  
+  <div id="g64" class="grid-item">4</div>
+  <div id="g65" class="grid-item">5</div>
+  <div id="g66" class="grid-item">6</div> 
+</div>
+
+
+
+
+<script>
+
+    const max=36;
+    const cells=36;
+    const rows=6;
+    const cols=6;
+    var next=1;
+
+    var numbersArray = [];
+    var cellsArray=$(".grid-item").toArray();
+
+    function creategame(){
+
+        for (var i = 1; i <= cells; i++) {
+            numbersArray.push(i);
+        }
+
+        for (var i = 0; i < cells; i++) {
+            x=Math.floor((Math.random() * numbersArray.length));
+            newNumber=numbersArray[x];
+            
+            console.log(numbersArray);
+            console.log(x + ' - '+ newNumber);
+            
+            numbersArray.splice(x,1);
+            $(cellsArray[i]).text(newNumber);
+        }
+    }
+
+    function showCurtain() {
+        $("#curtain").show();
+    }
+
+    function hideCurtain() {
+        $("#curtain").hide();
+        createGame();
+    } 
+
+    function clicked(id){
+        itemClicked=$('#'+id).text();
+       
+        console.log(itemClicked+' '+next);
+        if(itemClicked==next){
+            next++;
+            $("#nextNumber").text(next);
+            $('#'+id).addClass("clicked-item");
+        }
+        if(next>max){
+            showCurtain();
+        }
+    }
+
+    function restart(){
+        showCurtain();
+    }
+
+    $(".grid-item").on('click', function(event){
+        clicked($(this).attr('id'));
+    });
+
+    $(document).ready(function() {
+        creategame();
+    });
+
+</script>
+</body>
+</html>
