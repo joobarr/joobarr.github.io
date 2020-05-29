@@ -164,8 +164,8 @@
         showCurtain();
     }
 
-    $(".grid-item").on('click', function(event){
-        clicked($(this).attr('id'));
+    $(".grid-item").mousedown( function(event){
+        $(this).attr('id');
     });
 
     $(document).ready(function() {
