@@ -163,8 +163,8 @@
         creategame();
     }
 
-    $(".grid-item").click( function(event){
-        $(this).attr('id');
+    $(".grid-item").mousedown( function(event){
+        clicked($(this).attr('id'));
     });
 
     $(document).ready(function() {
