@@ -53,15 +53,16 @@
 </head>
 <body>
 
-<div style="height: 15%;">
-    <h1><em>NEXT <var id="nextNumber">1</var></em></h1>
-</div>
-
-<div id="curtain" class="overlay" onclick="hideCurtain()">
-    <div class="curtainText">
-        play
+    <div id="curtain" class="overlay" onclick="hideCurtain()">
+        <div class="curtainText">
+            play
+        </div>
     </div>
-</div>
+
+    <div style="height: 15%;">
+        <h1><em>NEXT <var id="nextNumber">1</var></em></h1>
+    </div>
+
 
 <div class="grid-container">
   <div id="g11" class="grid-item">1</div>
@@ -141,7 +142,7 @@
 
     function hideCurtain() {
         $("#curtain").hide();
-        createGame();
+        restart();
     } 
 
     function clicked(id){
